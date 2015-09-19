@@ -24,5 +24,13 @@
     <ClInclude Include="Source\Defines.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\IPC\IPC_Packet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source\Main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
