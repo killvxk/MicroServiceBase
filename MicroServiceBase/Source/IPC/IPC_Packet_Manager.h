@@ -15,9 +15,10 @@
 class IPC_Packet_Manager
 {
     // Crypto properties.
-    static uint8_t Encryptionkey[32];
-    static uint8_t Base;
-    static uint8_t Exponent;
+    static uint8_t  Encryptionkey[32];
+    static uint8_t  Exponent;
+    static float    Secret;
+    static uint16_t Base;    
 
 public:
     // Fetch the header properties.
@@ -38,8 +39,8 @@ public:
     static bool InflatePayload(void *Compressedbuffer, uint32_t Compressedlength, void **Plainbuffer, uint32_t *Plainlength);
 
     // Create the crypto properties.
-    static void CreateNewSecret();
+    static uint8_t CreateBase();
+    static float CreateSecret();
     static void CreateSharedbase(uint8_t PeerBase);
-    static void CreateCryptokey(uint8_t PeerExponent);
-    static uint16_t GetSecret();
+    static void CreateCryptokey(double PeerSecret);
 };
