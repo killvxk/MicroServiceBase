@@ -8,6 +8,7 @@
 
 #include "SQL_Manager.h"
 #include "SQLite\sqlite3.h"
+#include "..\STDInclude.h"
 #include <stdio.h>
 #include <mutex>
 
