@@ -126,6 +126,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Source\Database\SQL_Manager.h" />
     <ClInclude Include="Source\Defines.h" />
     <ClInclude Include="Source\IPC\IPC_Packet.h" />
     <ClInclude Include="Source\STDInclude.h" />
