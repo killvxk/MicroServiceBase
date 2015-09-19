@@ -92,6 +92,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -126,6 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Source\Database\SQLite\sqlite3.h" />
     <ClInclude Include="Source\Database\SQL_Manager.h" />
     <ClInclude Include="Source\Defines.h" />
     <ClInclude Include="Source\IPC\IPC_Packet.h" />
@@ -133,6 +135,8 @@
     <ClInclude Include="Source\Warnings.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Database\SQLite\sqlite3.c" />
+    <ClCompile Include="Source\Database\SQL_Manager.cpp" />
     <ClCompile Include="Source\Main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
