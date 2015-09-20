@@ -10,6 +10,8 @@
 
 #include "IPC_Packet.h"
 #include "IPC_Packet_Manager.h"
+#include "..\Utility\Crypto\SM3.h"
+#include "..\Utility\Compression\lz4.h"
 #include <time.h>
 
 // Crypto properties.
@@ -37,8 +39,7 @@ void IPC_Packet_Manager::CreateSharedbase(uint8_t PeerBase)
 void IPC_Packet_Manager::CreateCryptokey(double PeerSecret)
 {
     long double SharedSecret = powl(PeerSecret, Exponent);
-    
-    // TODO: Hashing of the shared secret.
+    sm3((const unsigned char *)&SharedSecret, sizeof(long double), Encryptionkey);
 }
 
 // Fetch the header properties.
@@ -80,19 +81,37 @@ bool     IPC_Packet_Manager::GetOption4(uint8_t PacketHeader[6])
 }
 
 // Work on the payload.
-bool EncryptPayload(uint8_t PacketHeader[6], void *Plaintext, void *Ciphertext, uint32_t BufferLength)
+bool IPC_Packet_Manager::EncryptPayload(uint8_t PacketHeader[6], void *Plaintext, void *Ciphertext, uint32_t BufferLength)
 {
     return false;
 }
-bool DecryptPayload(uint8_t PacketHeader[6], void *Ciphertext, void *Plaintext, uint32_t BufferLength)
+bool IPC_Packet_Manager::DecryptPayload(uint8_t PacketHeader[6], void *Ciphertext, void *Plaintext, uint32_t BufferLength)
 {
     return false;
 }
-bool DeflatePayload(void *Plainbuffer, uint32_t Plainlength, void **Compressedbuffer, uint32_t *Compressedlength)
+bool IPC_Packet_Manager::DeflatePayload(void *Plainbuffer, uint32_t Plainlength, void **Compressedbuffer, uint32_t *Compressedlength)
 {
-    return false;
+    // Compression rate should be about 2.1 so the buffer is a little large.
+    *Compressedbuffer = malloc(Plainlength);
+    *Compressedlength = LZ4_compress_fast((const char *)Plainbuffer, (char *)*Compressedbuffer, Plainlength, Plainlength, 1);
+    return *Compressedlength != 0;
 }
-bool InflatePayload(void *Compressedbuffer, uint32_t Compressedlength, void **Plainbuffer, uint32_t *Plainlength)
+bool IPC_Packet_Manager::InflatePayload(void *Compressedbuffer, uint32_t Compressedlength, void **Plainbuffer, uint32_t *Plainlength)
 {
-    return false;
+    int InflationResult = 0;
+
+    // Compression rate should be about 2.1 so the buffer is a little large.
+    *Plainbuffer = malloc(Compressedlength * 3);
+    InflationResult = LZ4_decompress_safe((const char *)Compressedbuffer, (char *)*Plainbuffer, Compressedlength, Compressedlength * 3);
+
+    if (InflationResult < 0)
+    {
+        free(*Plainbuffer);
+        return false;
+    }
+    else
+    {
+        *Plainlength = InflationResult;
+        return true;
+    }
 }
