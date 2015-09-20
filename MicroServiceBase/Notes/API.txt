@@ -1,0 +1,15 @@
+Communication with the microservice.
+
+As one can not trust the client, no direct connection is made.
+The microservice only has two connections.
+One being to a TCP routing server.
+The other to a web interface.
+
+This allows the microservices to split across multiple servers.
+Also allows the routers to have fallback services if one dies.
+But most importantly, the router verifies the client before relaying.
+Thus one can not try to abuse the services without identifying.
+
+Monitoring tools on the server can access logs async.
+The database also allows for reading, but not writing.
+Banning of users take place in the routing server.
