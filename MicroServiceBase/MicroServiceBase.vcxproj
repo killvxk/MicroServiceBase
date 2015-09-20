@@ -129,6 +129,7 @@
   <ItemGroup>
     <ClInclude Include="Source\Database\SQLite\sqlite3.h" />
     <ClInclude Include="Source\Database\SQL_Manager.h" />
+    <ClInclude Include="Source\DebugInfo\LogToDisk.h" />
     <ClInclude Include="Source\Defines.h" />
     <ClInclude Include="Source\IPC\IPC_Packet.h" />
     <ClInclude Include="Source\IPC\IPC_Packet_Manager.h" />
@@ -136,11 +137,13 @@
     <ClInclude Include="Source\Utility\Compression\lz4.h" />
     <ClInclude Include="Source\Utility\Crypto\AES256.h" />
     <ClInclude Include="Source\Utility\Crypto\SM3.h" />
+    <ClInclude Include="Source\Utility\String\VariadicArg.h" />
     <ClInclude Include="Source\Warnings.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Database\SQLite\sqlite3.c" />
     <ClCompile Include="Source\Database\SQL_Manager.cpp" />
+    <ClCompile Include="Source\DebugInfo\LogToDisk.cpp" />
     <ClCompile Include="Source\IPC\IPC_Packet_Manager.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\Utility\Compression\lz4.cpp" />

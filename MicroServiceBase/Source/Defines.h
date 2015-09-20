@@ -20,7 +20,7 @@
 // Debug features.
 #ifdef _DEBUG
 #define SafeString(string) string
-#define DebugPrint(string) string
+#define DebugPrint(string) LogToFile::PrintTimedString(string)
 #define PrintFunction() DebugPrint(__func__)
 #define HardDebugBreak() MessageBoxA(0, __FUNCTION__, 0, 0)
 #else
