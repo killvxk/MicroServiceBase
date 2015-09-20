@@ -131,6 +131,7 @@
     <ClInclude Include="Source\Database\SQL_Manager.h" />
     <ClInclude Include="Source\DebugInfo\LogToDisk.h" />
     <ClInclude Include="Source\Defines.h" />
+    <ClInclude Include="Source\IPC\IPC_Networking.h" />
     <ClInclude Include="Source\IPC\IPC_Packet.h" />
     <ClInclude Include="Source\IPC\IPC_Packet_Manager.h" />
     <ClInclude Include="Source\STDInclude.h" />
