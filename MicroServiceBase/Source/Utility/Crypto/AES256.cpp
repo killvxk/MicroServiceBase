@@ -115,6 +115,21 @@ Aes256::Aes256(const ByteArray& key)
         m_key[i] = key[i];
 }
 
+Aes256::Aes256(const ByteArray& key, const ByteArray& IV)
+    : m_key(ByteArray(key.size() > KEY_SIZE ? KEY_SIZE : key.size(), 0))
+    , m_salt(ByteArray(KEY_SIZE - m_key.size(), 0))
+    , m_rkey(ByteArray(KEY_SIZE, 0))
+    , m_buffer_pos(0)
+    , m_remainingLength(0)
+    , m_decryptInitialized(false)
+{
+    for (ByteArray::size_type i = 0; i < m_key.size(); ++i)
+        m_key[i] = key[i];
+
+    for (ByteArray::size_type i = 0; i < m_salt.size(); ++i)
+        m_rkey[i] = IV[i];
+}
+
 Aes256::~Aes256()
 {}
 

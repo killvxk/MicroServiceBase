@@ -32,6 +32,7 @@ class Aes256 {
 
 public:
     Aes256(const ByteArray& key);
+    Aes256(const ByteArray& key, const ByteArray& IV);
     ~Aes256();
 
     static ByteArray::size_type encrypt(const ByteArray& key, const ByteArray& plain, ByteArray& encrypted);
