@@ -80,6 +80,9 @@
     <ClCompile Include="Source\DebugInfo\LogToDisk.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\IPC\IPC_Networking.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Notes\Handshake.txt" />

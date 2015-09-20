@@ -145,6 +145,7 @@
     <ClCompile Include="Source\Database\SQLite\sqlite3.c" />
     <ClCompile Include="Source\Database\SQL_Manager.cpp" />
     <ClCompile Include="Source\DebugInfo\LogToDisk.cpp" />
+    <ClCompile Include="Source\IPC\IPC_Networking.cpp" />
     <ClCompile Include="Source\IPC\IPC_Packet_Manager.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\Utility\Compression\lz4.cpp" />

@@ -1,6 +1,6 @@
 /*
     Initial author: (https://github.com/)Convery
-    Started: 2015-09-19
+    Started: 2015-09-21
     License: LGPL 3.0
     Notes:
         Polls the connections either in threads or manually.
