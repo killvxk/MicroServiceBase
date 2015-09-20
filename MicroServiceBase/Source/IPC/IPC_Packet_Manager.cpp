@@ -11,6 +11,7 @@
 #include "IPC_Packet.h"
 #include "IPC_Packet_Manager.h"
 #include "..\Utility\Crypto\SM3.h"
+#include "..\Utility\Crypto\AES256.h"
 #include "..\Utility\Compression\lz4.h"
 #include <time.h>
 
@@ -83,11 +84,39 @@ bool     IPC_Packet_Manager::GetOption4(uint8_t PacketHeader[6])
 // Work on the payload.
 bool IPC_Packet_Manager::EncryptPayload(uint8_t PacketHeader[6], void *Plaintext, void *Ciphertext, uint32_t BufferLength)
 {
-    return false;
+    // Generate the IV from the packet header.
+    uint8_t InitialVector[32];
+    sm3((const unsigned char *)&PacketHeader, 6, InitialVector);
+
+    // Encrypt.
+    ByteArray Encrypted;
+    Aes256 aes(Encryptionkey, InitialVector);
+    aes.encrypt_start(BufferLength, Encrypted);
+    aes.encrypt_continue((const unsigned char *)Plaintext, BufferLength, Encrypted);
+    aes.encrypt_end(Encrypted);
+
+    // Copy to the pre-allocated buffer.
+    if(Encrypted.size())
+        memcpy(Ciphertext, Encrypted.data(), BufferLength);
+    return Encrypted.size();
 }
 bool IPC_Packet_Manager::DecryptPayload(uint8_t PacketHeader[6], void *Ciphertext, void *Plaintext, uint32_t BufferLength)
 {
-    return false;
+    // Generate the IV from the packet header.
+    uint8_t InitialVector[32];
+    sm3((const unsigned char *)&PacketHeader, 6, InitialVector);
+
+    // Decrypt.
+    ByteArray Decrypted;
+    Aes256 aes(Encryptionkey, InitialVector);
+    aes.decrypt_start(BufferLength);
+    aes.decrypt_continue((const unsigned char *)Ciphertext, BufferLength, Decrypted);
+    aes.decrypt_end(Decrypted);
+
+    // Copy to the pre-allocated buffer.
+    if (Decrypted.size())
+        memcpy(Plaintext, Decrypted.data(), BufferLength);
+    return Decrypted.size();
 }
 bool IPC_Packet_Manager::DeflatePayload(void *Plainbuffer, uint32_t Plainlength, void **Compressedbuffer, uint32_t *Compressedlength)
 {
