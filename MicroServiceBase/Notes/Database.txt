@@ -1,0 +1,11 @@
+The microservices generally have two database connections.
+A remote one that contains information about a user;
+and a local one that contains all relevant information.
+
+If the service handles authentication, then the local
+database will have passwords and related information.
+No other service or client has access to this database.
+
+The remote database runs on MariaBD while the local uses
+SQLite. This is to take advantage of the encryption in
+MariaDB as well as having a low latency DB for the service.
