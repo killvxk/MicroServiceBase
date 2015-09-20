@@ -1,0 +1,25 @@
+The microservice handshake, inspired by Diffie-Hellman but very insecure.
+There is no sensitive information sent, but we still don't want any logs.
+
+uint8 Base;
+uint8 Exponent;
+uint16 SharedBase;
+float32 PublicSecret;
+float64/128 SharedSecret;
+
+Limitation:
+As the exponent is 8 bit, it'll take a maximum of 512 guesses to find both secret exponents.
+If a custom big integer class is implemented, 512 bit bases and exponents should be minimum.
+
+Communication example:
+[Public] Client: Hello server, I want to use the base (4) for future communication.
+[Public] Server: Hello client, I want to use the base (9) for future communication.
+[Internal] Both: We'll use a shared base of (4 * 9 = 36) then.
+
+[Public] Client: The shared base to the power of my private exponent(3) is (46656).
+[Public] Server: The shared base to the power of my private exponent(2) is (1296).
+[Internal] Client: The shared secret is (1296)  to the power of my exponent(3), i.e. (2176782336).
+[Internal] Server: The shared secret is (46656) to the power of my exponent(2), i.e. (2176782336).
+
+[Internal] Both: The AES256 encryptionkey is SM3(2176782336).
+[Internal] Both: The AES256 initialvector is SM3(PacketHeader).

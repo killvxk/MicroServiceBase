@@ -16,7 +16,7 @@
 #include <time.h>
 
 // Crypto properties.
-uint8_t  IPC_Packet_Manager::Encryptionkey[32];
+uint8_t  IPC_Packet_Manager::Encryptionkey[32]{};
 uint8_t  IPC_Packet_Manager::Exponent;
 float    IPC_Packet_Manager::Secret;
 uint16_t IPC_Packet_Manager::Base;
