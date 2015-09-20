@@ -134,6 +134,7 @@
     <ClInclude Include="Source\IPC\IPC_Packet_Manager.h" />
     <ClInclude Include="Source\STDInclude.h" />
     <ClInclude Include="Source\Utility\Compression\lz4.h" />
+    <ClInclude Include="Source\Utility\Crypto\AES256.h" />
     <ClInclude Include="Source\Utility\Crypto\SM3.h" />
     <ClInclude Include="Source\Warnings.h" />
   </ItemGroup>
@@ -143,6 +144,7 @@
     <ClCompile Include="Source\IPC\IPC_Packet_Manager.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\Utility\Compression\lz4.cpp" />
+    <ClCompile Include="Source\Utility\Crypto\AES256.cpp" />
     <ClCompile Include="Source\Utility\Crypto\SM3.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
